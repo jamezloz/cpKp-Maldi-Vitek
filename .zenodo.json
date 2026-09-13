@@ -3,16 +3,55 @@
   "upload_type": "software",
   "description": "R and Python scripts reproducing every analysis of the paper: peak-list and mzML dataset construction, PERMANOVA/PERMADISP and ordination, biomarker discovery with bootstrap stability selection, panel complementarity, UniProt in silico annotation, nine-classifier evaluation under strain-blocked cross-validation, cross-laboratory transfer designs, clonal-structure controls, SHAP, conformal prediction and decision curve analysis, and the scripts that build the main and supplementary figures and tables. Spectra are deposited separately in Zenodo.",
   "creators": [
-    {"name": "Martínez-Lozano, Jerson Andrés", "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires; CONICET, Argentina"},
-    {"name": "Figueroa-Espinosa, Roque", "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires, Argentina"},
-    {"name": "Barraza, Lautaro", "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires, Argentina"},
-    {"name": "Martínez, Ivana", "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires, Argentina"},
-    {"name": "Cejas, Daniela", "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires, Argentina"},
-    {"name": "Rocca, Florencia", "affiliation": "ANLIS Dr. Carlos G. Malbrán, Argentina"},
-    {"name": "Gutkind, Gabriel", "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires; CONICET, Argentina"},
-    {"name": "Di Conza, José", "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires; CONICET, Argentina"}
+    {
+      "name": "Martínez-Lozano, Jerson Andrés",
+      "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires; CONICET, Argentina",
+      "orcid": "0000-0002-6754-5385"
+    },
+    {
+      "name": "Figueroa-Espinosa, Roque",
+      "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires, Argentina",
+      "orcid": "0000-0002-3631-4584"
+    },
+    {
+      "name": "Barraza, Lautaro",
+      "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires, Argentina"
+    },
+    {
+      "name": "Martínez, Ivana",
+      "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires, Argentina"
+    },
+    {
+      "name": "Cejas, Daniela",
+      "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires, Argentina",
+      "orcid": "0000-0001-7418-3573"
+    },
+    {
+      "name": "Rocca, Florencia",
+      "affiliation": "ANLIS Dr. Carlos G. Malbrán, Argentina"
+    },
+    {
+      "name": "Gutkind, Gabriel",
+      "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires; CONICET, Argentina",
+      "orcid": "0000-0003-1999-9785"
+    },
+    {
+      "name": "Di Conza, José",
+      "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires; CONICET, Argentina",
+      "orcid": "0000-0003-0520-1744"
+    }
   ],
-  "keywords": ["MALDI-TOF MS", "Klebsiella pneumoniae", "carbapenemase", "KPC", "NDM", "antimicrobial resistance", "machine learning", "R", "Python"],
+  "keywords": [
+    "MALDI-TOF MS",
+    "Klebsiella pneumoniae",
+    "carbapenemase",
+    "KPC",
+    "NDM",
+    "antimicrobial resistance",
+    "machine learning",
+    "R",
+    "Python"
+  ],
   "license": "MIT",
   "access_right": "open"
 }
