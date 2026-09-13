@@ -1,0 +1,6 @@
+resultados/
+renv/library/
+renv/staging/
+__pycache__/
+.Rhistory
+.DS_Store
