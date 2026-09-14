@@ -43,7 +43,7 @@ pA <- ggplot(bee_rs, aes(shap_value, feat_label, colour = shap_value)) +
                          midpoint = 0,
                          name = "SHAP\n(blue=CSKp, red=CRKp)") +
   labs(x = "SHAP value", y = NULL, tag = "A",
-       subtitle = "TXT · CRKp vs CSKp · top 20") +
+       subtitle = "Peak-list · CRKp vs CSKp · top 20") +
   theme_paper() +
   theme(legend.position  = "right",
         axis.text.y      = element_text(size = 8.5),
@@ -58,7 +58,7 @@ pB <- ggplot(bee_kpc, aes(shap_value, feat_label, colour = shap_value)) +
                          midpoint = 0,
                          name = "SHAP\n(green=NDM, orange=KPC)") +
   labs(x = "SHAP value", y = NULL, tag = "B",
-       subtitle = "TXT · KPC vs NDM · top 15") +
+       subtitle = "Peak-list · KPC vs NDM · top 15") +
   theme_paper() +
   theme(legend.position  = "right",
         axis.text.y      = element_text(size = 8.5),
