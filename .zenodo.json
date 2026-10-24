@@ -23,7 +23,7 @@
     },
     {
       "name": "Cejas, Daniela",
-      "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires, Argentina",
+      "affiliation": "IBaViM, Facultad de Farmacia y Bioquímica, Universidad de Buenos Aires; CONICET, Argentina",
       "orcid": "0000-0001-7418-3573"
     },
     {
@@ -49,5 +49,13 @@
     "Python"
   ],
   "license": "MIT",
-  "access_right": "open"
+  "access_right": "open",
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.22738864",
+      "relation": "isSupplementedBy",
+      "resource_type": "dataset",
+      "scheme": "doi"
+    }
+  ]
 }

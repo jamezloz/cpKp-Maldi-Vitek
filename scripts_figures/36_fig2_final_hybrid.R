@@ -30,15 +30,17 @@ eigs_r <- pcoa_r$eig; eigs_r[eigs_r < 0] <- 0
 pct_r  <- round(eigs_r[1:2] / sum(eigs_r) * 100, 1)
 dtA <- data.table(PC1 = pcoa_r$points[, 1], PC2 = pcoa_r$points[, 2], Site = meta_sh$Site)
 pA <- ggplot(dtA, aes(PC1, PC2, colour = Site)) +
-  stat_ellipse(aes(group = Site), level = 0.90, linewidth = 0.6,
+  stat_ellipse(aes(group = Site), level = 0.90, linewidth = 0.4,
               linetype = "dashed", show.legend = FALSE) +
-  geom_point(size = 1.6, alpha = 0.75) +
+  geom_point(size = 0.7, alpha = 0.75) +
   scale_colour_manual(values = c("Site A" = "#E64B35", "Site M" = "#4DBBD5")) +
   labs(title = "Replicate-level (individual spectra, raw / cosine)", tag = "A",
        x = paste0("PCoA1 (", pct_r[1], "%)"), y = paste0("PCoA2 (", pct_r[2], "%)")) +
-  theme_paper() +
-  theme(plot.title = element_text(size = 12, face = "bold"),
-        plot.tag = element_text(size = 16, face = "bold"),
+  theme_paper(base_size = 8) +
+  theme(plot.title = element_text(size = 8.5, face = "bold"),
+        plot.tag = element_text(size = 11, face = "bold"),
+        plot.margin = ggplot2::margin(4, 6, 4, 4),
+        legend.text = element_text(size = 8),
         legend.position = "bottom")
 
 keys <- paste(meta_sh$strain_id, meta_sh$treatment, meta_sh$source_lab, sep = "__")
@@ -82,18 +84,19 @@ disp_rows[, representation := factor(representation, levels = rep_order)]
 lab_dt <- unique(disp_rows[, .(representation, sig)])
 
 pB <- ggplot(disp_rows, aes(Site, dist_to_centroid, fill = Site)) +
-  geom_boxplot(width = 0.55, outlier.size = 0.7, outlier.alpha = 0.4, linewidth = 0.4) +
+  geom_boxplot(width = 0.55, outlier.size = 0.4, outlier.alpha = 0.4, linewidth = 0.3) +
   geom_text(data = lab_dt, aes(x = 1.5, y = Inf, label = sig), inherit.aes = FALSE,
-            vjust = 1.8, size = 2.9) +
+            vjust = 1.6, size = 2.85) +
   scale_fill_manual(values = c("Site A" = "#E64B35", "Site M" = "#4DBBD5"), guide = "none") +
   facet_wrap(~ representation, nrow = 1, scales = "free_y") +
   labs(x = NULL, y = "Distance to group centroid\n(PERMADISP)", tag = "B") +
-  theme_paper() +
-  theme(plot.tag = element_text(size = 16, face = "bold"),
-        strip.text = element_text(size = 8.5, face = "bold"),
-        axis.text.x = element_text(size = 8.5)) +
+  theme_paper(base_size = 8) +
+  theme(plot.tag = element_text(size = 11, face = "bold"),
+        plot.margin = ggplot2::margin(4, 6, 4, 4),
+        strip.text = element_text(size = 8, face = "bold"),
+        axis.text.x = element_text(size = 8)) +
   coord_cartesian(clip = "off")
 
 fig2 <- pA / pB + plot_layout(heights = c(1.15, 1))
-save_fig(fig2, "fig2_final_hybrid", width = 24, height = 19)
+save_fig(fig2, "fig2_final_hybrid", width = 17.4, height = 14.5, dpi = 600)
 cat("Saved fig2_final_hybrid.png\n")

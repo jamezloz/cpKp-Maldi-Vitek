@@ -2,13 +2,14 @@
 
 Analysis code for *From routine identification to resistance prediction: reproducible MALDI-TOF MS biomarkers and machine learning classify carbapenemase-producing* Klebsiella pneumoniae *across spectral data types* (Martínez-Lozano et al.).
 
-Spectra (peak lists, mzML files, manifest and processed matrices) are deposited in Zenodo: [INSERT DOI].
+Spectra (peak lists, mzML files, manifest and processed matrices) are deposited in Zenodo: https://doi.org/10.5281/zenodo.22738864.
 
 ## Layout
 
 ```
 00_paper1_metadata.R        data path and file-name parsing (edit DATA_BASE here)
 annotate_biomarkers_uniprot.py   UniProt in silico annotation (Table 3, Table S7)
+annotate_decoy_control.py        decoy control for the mass-based annotation
 scripts_txt/                peak-list (.txt) pipeline
 scripts_raw/                mzML pipeline (MALDIquant, TopHat)
 scripts_figures/            main-text and supplementary figures
@@ -30,7 +31,7 @@ Peak-list dataset (`scripts_txt/`): `01` → `02` → `03`, `03b`, `03d` → `04
 
 RAW dataset (`scripts_raw/`): `17` → `01` → `02`, `02b` → `03` → `11` → `07` → `06d` → `24` → `23` → `13` → `12` → `15` → `26` → `28` → `benchmark_conformal_raw.py`, `benchmark_dca_raw.py`.
 
-Then `annotate_biomarkers_uniprot.py` (needs network access to the UniProt REST API), the `scripts_supp/build_*.R` exports, and the figures: `scripts_figures/32_fig_pcoa_main.R` (Figure 1), `36_fig2_final_hybrid.R` (Figure 2), `31_fig_shap_composite.R` (Figure 3), `genera_sfig_suplementario.R [N]` (Figures S1–S8).
+Then `annotate_biomarkers_uniprot.py` and `annotate_decoy_control.py` (both need network access to the UniProt REST API), the `scripts_supp/build_*.R` exports, and the figures: `scripts_figures/32_fig_pcoa_main.R` (Figure 1), `36_fig2_final_hybrid.R` (Figure 2), `31_fig_shap_composite.R` (Figure 3), `genera_sfig_suplementario.R [N]` (Figures S1–S8).
 
 Random seeds are fixed inside the scripts; the bootstrap and cross-validation loops (100–200 iterations) take from minutes to a few hours per script.
 
