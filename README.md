@@ -10,6 +10,7 @@ Spectra (peak lists, mzML files, manifest and processed matrices) are deposited 
 00_paper1_metadata.R        data path and file-name parsing (edit DATA_BASE here)
 annotate_biomarkers_uniprot.py   UniProt in silico annotation (Table 3, Table S7)
 annotate_decoy_control.py        decoy control for the mass-based annotation
+acquisition_confounder_control.py   acquisition period/configuration controls (Sections 2.6, 3.3)
 scripts_txt/                peak-list (.txt) pipeline
 scripts_raw/                mzML pipeline (MALDIquant, TopHat)
 scripts_figures/            main-text and supplementary figures
@@ -32,6 +33,8 @@ Peak-list dataset (`scripts_txt/`): `01` → `02` → `03`, `03b`, `03d` → `04
 RAW dataset (`scripts_raw/`): `17` → `01` → `02`, `02b` → `03` → `11` → `07` → `06d` → `24` → `23` → `13` → `12` → `15` → `26` → `28` → `benchmark_conformal_raw.py`, `benchmark_dca_raw.py`.
 
 Then `annotate_biomarkers_uniprot.py` and `annotate_decoy_control.py` (both need network access to the UniProt REST API), the `scripts_supp/build_*.R` exports, and the figures: `scripts_figures/32_fig_pcoa_main.R` (Figure 1), `36_fig2_final_hybrid.R` (Figure 2), `31_fig_shap_composite.R` (Figure 3), `genera_sfig_suplementario.R [N]` (Figures S1–S8).
+
+`acquisition_confounder_control.py` reads the acquisition metadata stored in the spectra headers and runs directly on the unzipped Zenodo record: `python acquisition_confounder_control.py PATH_TO_SPECTRA`, where the folder holds the four spectra folders and `spectra_manifest.csv`.
 
 Random seeds are fixed inside the scripts; the bootstrap and cross-validation loops (100–200 iterations) take from minutes to a few hours per script.
 
