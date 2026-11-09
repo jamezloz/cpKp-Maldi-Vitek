@@ -28,13 +28,15 @@ Scripts write to `resultados/TXT_modular/`, `resultados/RAW_modular/`, `resultad
 
 ## Execution order
 
-Peak-list dataset (`scripts_txt/`): `01` → `02` → `03`, `03b`, `03d` → `04` → `08` → `06c`, `06d`, `06e`, `06f` → `07d`, `07f` → `12` → `15` → `16` → `18` → `19` → `21` → `25` → `benchmark_conformal_txt.py`, `benchmark_dca_txt.py`.
+Peak-list dataset (`scripts_txt/`): `01` → `02` → `03`, `03b`, `03d` → `04` → `08` → `06c`, `06d`, `06e`, `06f` → `07d`, `07f` → `12` → `15` → `16` → `18` → `19` → `21` → `25` → `30`, `33` → `benchmark_conformal_txt.py`, `benchmark_dca_txt.py`.
 
-RAW dataset (`scripts_raw/`): `17` → `01` → `02`, `02b` → `03` → `11` → `07` → `06d` → `24` → `23` → `13` → `12` → `15` → `26` → `28` → `benchmark_conformal_raw.py`, `benchmark_dca_raw.py`.
+RAW dataset (`scripts_raw/`): `17` → `01` → `02`, `02b` → `03` → `11` → `07` → `06d` → `24` → `23` → `13` → `12` → `15` → `26` → `28` → `31`, `32` → `benchmark_conformal_raw.py`, `benchmark_dca_raw.py`.
 
 Then `annotate_biomarkers_uniprot.py` and `annotate_decoy_control.py` (both need network access to the UniProt REST API), the `scripts_supp/build_*.R` exports, and the figures: `scripts_figures/32_fig_pcoa_main.R` (Figure 1), `36_fig2_final_hybrid.R` (Figure 2), `31_fig_shap_composite.R` (Figure 3), `genera_sfig_suplementario.R [N]` (Figures S1–S8).
 
 `acquisition_confounder_control.py` reads the acquisition metadata stored in the spectra headers and runs directly on the unzipped Zenodo record: `python acquisition_confounder_control.py PATH_TO_SPECTRA`, where the folder holds the four spectra folders and `spectra_manifest.csv`.
+
+`scripts_txt/30` and `33` repeat the CRKp/CSKp analyses within each site and test the acquisition period at Site M; `scripts_raw/31` covers charge-state pairs and `32` the strain-disjoint external validation (both use the pooled object written by `scripts_raw/15`).
 
 Random seeds are fixed inside the scripts; the bootstrap and cross-validation loops (100–200 iterations) take from minutes to a few hours per script.
 
