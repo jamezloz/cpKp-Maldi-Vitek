@@ -10,9 +10,13 @@ build_pooled <- function() {
   cat("Espectros:", nrow(meta), " | ")
   print(table(meta$source_lab, meta$label_res_sen))
   specs <- lapply(meta$path, preprocess_raw_spectrum, baseline = 'tophat', normalize = FALSE)
-  names(specs) <- meta$sample
+  # Site + file key: 154 Site M files share their name with a Site A file, and
+  # indexing by name alone returned the Site A row for them.
+  key <- paste(meta$source_lab, meta$sample, sep = "__")
+  stopifnot(!anyDuplicated(key))
+  names(specs) <- key
   peak_obj <- build_peak_matrix_raw(specs)
-  list(matrix = peak_obj$matrix[meta$sample, , drop = FALSE], metadata = meta)
+  list(matrix = peak_obj$matrix[key, , drop = FALSE], metadata = meta)
 }
 
 crossplatform_distances <- function(pooled) {

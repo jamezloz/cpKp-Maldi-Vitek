@@ -8,8 +8,9 @@ Spectra (peak lists, mzML files, manifest and processed matrices) are deposited 
 
 ```
 00_paper1_metadata.R        data path and file-name parsing (edit DATA_BASE here)
-annotate_biomarkers_uniprot.py   UniProt in silico annotation (Table 3, Table S7)
-annotate_decoy_control.py        decoy control for the mass-based annotation
+annotate_biomarkers_uniprot.py   UniProt query used by the annotation (complete entries, ±10 Da)
+annotate_candidates.py           annotation of Table 3 and Table S7 and decoy control, in one run
+annotation/                      candidate masses annotated in Table S7
 acquisition_confounder_control.py   acquisition period/configuration controls (Sections 2.6, 3.3)
 scripts_txt/                peak-list (.txt) pipeline
 scripts_raw/                mzML pipeline (MALDIquant, TopHat)
@@ -28,17 +29,26 @@ Scripts write to `resultados/TXT_modular/`, `resultados/RAW_modular/`, `resultad
 
 ## Execution order
 
-Peak-list dataset (`scripts_txt/`): `01` → `02` → `03`, `03b`, `03d` → `04` → `08` → `06c`, `06d`, `06e`, `06f` → `07d`, `07f` → `12` → `15` → `16` → `18` → `19` → `21` → `25` → `30`, `33` → `benchmark_conformal_txt.py`, `benchmark_dca_txt.py`.
+Peak-list dataset (`scripts_txt/`): `01` → `02` → `03`, `03b`, `03d` → `04` → `08` → `06c`, `06d`, `06e`, `06f` → `07d`, `07f` → `11` → `12` → `15` → `16` → `18` → `19` → `21` → `25` → `30`, `33` → `40` (needs the RAW objects as well) → `benchmark_conformal_txt.py`, `benchmark_dca_txt.py`.
 
 RAW dataset (`scripts_raw/`): `17` → `01` → `02`, `02b` → `03` → `11` → `07` → `06d` → `24` → `23` → `13` → `12` → `15` → `26` → `28` → `31`, `32` → `benchmark_conformal_raw.py`, `benchmark_dca_raw.py`.
 
-Then `annotate_biomarkers_uniprot.py` and `annotate_decoy_control.py` (both need network access to the UniProt REST API), the `scripts_supp/build_*.R` exports, and the figures: `scripts_figures/32_fig_pcoa_main.R` (Figure 1), `36_fig2_final_hybrid.R` (Figure 2), `31_fig_shap_composite.R` (Figure 3), `genera_sfig_suplementario.R [N]` (Figures S1–S8).
+Then `annotate_candidates.py` (needs network access to the UniProt REST API), the `scripts_supp/build_*.R` exports, and the figures: `scripts_figures/32_fig_pcoa_main.R` (Figure 1), `36_fig2_final_hybrid.R` (Figure 2), `31_fig_shap_composite.R` (Figure 3), `genera_sfig_suplementario.R [N]` (Figures S1–S8).
 
 `acquisition_confounder_control.py` reads the acquisition metadata stored in the spectra headers and runs directly on the unzipped Zenodo record: `python acquisition_confounder_control.py PATH_TO_SPECTRA`, where the folder holds the four spectra folders and `spectra_manifest.csv`.
 
 `scripts_txt/30` and `33` repeat the CRKp/CSKp analyses within each site and test the acquisition period at Site M; `scripts_raw/31` covers charge-state pairs and `32` the strain-disjoint external validation (both use the pooled object written by `scripts_raw/15`).
 
+`scripts_txt/11` gives the same-strain and between-strain distances of Section 3.3, and `scripts_txt/40` repeats the main analyses with partitions blocked by the base strain code (strains with a suffixed second entry, Sections 2.1 and 2.9).
+
 Random seeds are fixed inside the scripts; the bootstrap and cross-validation loops (100–200 iterations) take from minutes to a few hours per script.
+
+## Changes in v1.3.1
+
+- `scripts_raw/15` and `scripts_txt/11`: spectra are indexed by site and file, not by file name alone. Several Site M files share their name with a Site A file, and indexing by name returned the Site A spectrum for them; the RAW external validation (`scripts_raw/31`, `32`) and the same-strain distances change accordingly.
+- `annotate_biomarkers_uniprot.py`: only complete (non-fragment) UniProt entries are queried, with up to 500 results per window; `annotate_candidates.py` replaces `annotate_decoy_control.py`.
+- `scripts_raw/26`: out-of-bag validation of the two-peak KPC panel.
+- `scripts_txt/40`: sensitivity analysis for suffixed strain codes.
 
 ## Licence
 

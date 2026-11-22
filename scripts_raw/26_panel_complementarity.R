@@ -137,4 +137,12 @@ for (cfg in list(list(t="KPC", o="NDM", ms=MIN_SPEC, sf=i_11109, lab="KPC (semil
   }
 }
 
+# Two-peak KPC panel (11,109 Da plus the best second peak), as reported in the text
+MAX_PANEL <- 2
+r2 <- boot_eval("KPC", "NDM", MIN_SPEC, i_11109)
+cat(sprintf("KPC, 2-peak panel       n=%d iter | sens OOB %.3f (IC95 %.3f-%.3f) | spec OOB %.3f (IC95 %.3f-%.3f)\n",
+    nrow(r2), mean(r2$sens), quantile(r2$sens, .025), quantile(r2$sens, .975),
+    mean(r2$spec), quantile(r2$spec, .025), quantile(r2$spec, .975)))
+fwrite(r2, file.path(OUT_DIR, "bootstrap_oob_KPC_2peaks.csv"))
+
 cat("\nGuardado en:", OUT_DIR, "\n")

@@ -22,11 +22,13 @@ RESIST_KW = ("beta-lactamase", "carbapenem", "efflux", "porin", "resistance",
              "multidrug", "antibiotic", "penicillin-binding", "quaternary ammonium")
 
 def query(mass_lo: float, mass_hi: float) -> list[dict]:
-    q = f"(taxonomy_id:{TAXA[0]} OR taxonomy_id:{TAXA[1]}) AND mass:[{int(mass_lo)} TO {int(mass_hi)}]"
+    # complete entries only: a "fragment" entry's mass is not that of any real protein
+    q = (f"(taxonomy_id:{TAXA[0]} OR taxonomy_id:{TAXA[1]}) AND mass:[{int(mass_lo)} TO {int(mass_hi)}]"
+         " AND fragment:false")
     url = ("https://rest.uniprot.org/uniprotkb/search?query="
            + urllib.parse.quote(q)
            + "&fields=accession,reviewed,gene_names,protein_name,mass,cc_subcellular_location"
-           + "&format=tsv&size=50")
+           + "&format=tsv&size=500")
     try:
         with urllib.request.urlopen(url, timeout=40) as r:
             rows = r.read().decode("utf-8").splitlines()
